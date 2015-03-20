@@ -139,7 +139,7 @@ angular.module('angularWebixApp')
             columns.insertAt({
                 id: webix.uid(),
                 header: "New column"
-            }, 1);
+            }, 2);
 
             grid.refreshColumns();
 

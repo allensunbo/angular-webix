@@ -40,5 +40,6 @@ angular.module('angularWebixApp')
             for (var i = 0; i < sel.length; i++) {
                 grid.remove(sel[i]);
             }
+
         }
     });

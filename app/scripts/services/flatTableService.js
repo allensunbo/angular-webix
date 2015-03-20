@@ -6,9 +6,13 @@ angular.module('angularWebixApp')
                 view: "datatable",
                 select: "row",
                 multiselect: true,
+                dragColumn: true,
+                resizeColumn: true,
+                // frozen column
+                leftSplit: 2,
                 columns: [{
                     id: "rank",
-                    header: "",
+                    header: "rank",
                     css: "rank",
                     width: 50
                 }, {
@@ -48,7 +52,7 @@ angular.module('angularWebixApp')
                     },
                 }],
                 autoheight: false,
-                autowidth: true,
+                // autowidth: true,
                 data: [{
                     id: 1,
                     title: "The Shawshank Redemption",

@@ -6,9 +6,11 @@ angular.module('angularWebixApp')
                 view: "treetable",
                 selection: 'row',
                 columns: columns,
+                resizeColumn: true,
 
+                leftSplit: 1,
                 autoheight: false,
-                autowidth: true,
+                // autowidth: true,
                 data: data
 
             });

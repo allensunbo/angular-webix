@@ -8,14 +8,14 @@
  * Controller of the angularWebixApp
  */
 angular.module('angularWebixApp')
-    .controller('TreeTableCtrl', function($scope, $http, TreeTableBuilder, TreeTableColumnProvider,
+    .controller('TreeTableCtrl', function($scope, $http, TableProvider, TreeTableColumnProvider,
         TreeTableColumnProvider2) {
         var grid, loaded = false;
         $http.get('data/treeTable.json')
             .success(function(response) {
                 var columns = angular.copy(TreeTableColumnProvider);
                 var data = response.data;
-                grid = TreeTableBuilder("treeTable", columns, data);
+                grid = TableProvider.TreeTableBuilder("treeTable", columns, data);
                 loaded = true;
             });
 

@@ -8,21 +8,21 @@
  * Controller of the angularWebixApp
  */
 angular.module('angularWebixApp')
-    .controller('FlatTableCtrl', function($scope, $http, FlatTableBuilder,
+    .controller('FlatTableCtrl', function($scope, $http, TableProvider,
         FlatTableColumnProvider, WebService) {
 
-        var grid, loaded = false;
+        var tableBuilder, grid, loaded = false;
+
         WebService.flatTableData()
             .success(function(response) {
                 var columns = angular.copy(FlatTableColumnProvider);
-                grid = FlatTableBuilder("flatTable", columns, response.data);
+                tableBuilder = new TableProvider.FlatTableBuilder('flatTable', columns, response.data);
+                grid = tableBuilder.grid;
                 loaded = true;
             });
 
         $scope.removeColumn = function() {
-            var columns = webix.toArray(grid.config.columns);
-            columns.removeAt(2);
-            grid.refreshColumns();
+            tableBuilder.removeColumn(2);
         };
 
         $scope.addColumn = function() {

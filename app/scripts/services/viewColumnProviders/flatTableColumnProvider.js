@@ -1,3 +1,5 @@
+// Grouping columns
+// The functionality is available in Webix Pro edition only.
 angular.module('angularWebixApp')
     .factory('FlatTableColumnProvider', function() {
         return [{

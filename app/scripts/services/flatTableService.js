@@ -1,5 +1,5 @@
 angular.module('angularWebixApp')
-    .factory('FlatTable', function() {
+    .factory('FlatTableBuilder', function() {
         return function(container, columns, data) {
             return webix.ui({
                 container: container,

@@ -1,5 +1,5 @@
 angular.module('angularWebixApp')
-    .factory('TreeTable', function() {
+    .factory('TreeTableBuilder', function() {
         return function(container, columns, data) {
             return webix.ui({
                 container: container,

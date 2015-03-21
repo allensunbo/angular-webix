@@ -22,36 +22,14 @@ angular.module('angularWebixApp')
 
         $scope.updateData = function() {
             console.log('updateData');
-            grid.clearAll();
 
             WebService.treeTableData2()
                 .success(function(response) {
-                    var newColumns = angular.copy(TreeTableColumnProvider2);
                     var newData = response.data;
                     loaded = true;
+                    var newColumns = angular.copy(TreeTableColumnProvider2);
 
-                    grid.parse({
-                        data: newData
-                    });
-
-                    // also remove last column first and then insert it 
-                    var columns = webix.toArray(grid.config.columns);
-                    columns.removeAt(2);
-
-                    columns.insertAt({
-                        id: webix.uid(),
-                        header: "New column"
-                    }, 2);
-
-                    columns.insertAt({
-                        id: webix.uid(),
-                        header: "New column"
-                    }, 3);
-
-                    grid.refreshColumns();
-
-                    grid.refresh();
-
+                    tableProvider.rebuild(newColumns, newData);
                 });
         }
 

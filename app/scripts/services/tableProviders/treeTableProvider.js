@@ -21,31 +21,21 @@ angular.module('angularWebixApp')
 
         TreeTableProvider.prototype.rebuild = function(newColumns, newData) {
 
+            this.grid.clearAll();
 
-           
+            this.grid.parse({
+                data: newData
+            });
 
-
-            // also remove last column first and then insert it 
-            /*var columns = webix.toArray(this.grid.config.columns);
-            for (var i = 0; i < columns.length; i++) {
+            var columns = webix.toArray(this.grid.config.columns);
+            // have to remove in the reverse order
+            for (var i = columns.length - 1; i >= 0; i--) {
                 columns.removeAt(i);
             }
 
             for (var i = 0; i < newColumns.length; i++) {
                 columns.insertAt(newColumns[i], i);
-            }*/
-
-            /*columns.removeAt(2);
-
-            columns.insertAt({
-                id: webix.uid(),
-                header: "New column"
-            }, 2);
-
-            columns.insertAt({
-                id: webix.uid(),
-                header: "New column"
-            }, 3);*/
+            }
 
             this.grid.refreshColumns();
 

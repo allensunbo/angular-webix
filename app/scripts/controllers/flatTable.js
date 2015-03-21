@@ -13,7 +13,7 @@ angular.module('angularWebixApp')
         var grid, loaded = false;
         $http.get('data/flatTable.json')
             .success(function(response) {
-                var columns = FlatTableColumnProvider;
+                var columns = angular.copy(FlatTableColumnProvider);
                 grid = FlatTable("flatTable", columns, response.data);
                 loaded = true;
             });

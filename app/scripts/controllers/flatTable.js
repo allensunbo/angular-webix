@@ -8,9 +8,15 @@
  * Controller of the angularWebixApp
  */
 angular.module('angularWebixApp')
-    .controller('FlatTableCtrl', function($scope, FlatTable) {
+    .controller('FlatTableCtrl', function($scope, $http, FlatTable, FlatTableColumnProvider) {
 
-        var grid = FlatTable("flatTable");
+        var grid, loaded = false;
+        $http.get('data/flatTable.json')
+            .success(function(response) {
+                var columns = FlatTableColumnProvider;
+                grid = FlatTable("flatTable", columns, response.data);
+                loaded = true;
+            });
 
         $scope.removeColumn = function() {
             var columns = webix.toArray(grid.config.columns);

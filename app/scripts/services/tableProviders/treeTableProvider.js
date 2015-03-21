@@ -8,6 +8,7 @@ angular.module('angularWebixApp')
                 selection: 'row',
                 columns: columns,
                 resizeColumn: true,
+                resizeRow: true,
 
                 leftSplit: 1,
                 autoheight: false,
@@ -27,16 +28,8 @@ angular.module('angularWebixApp')
                 data: newData
             });
 
-            var columns = webix.toArray(this.grid.config.columns);
-            // have to remove in the reverse order
-            for (var i = columns.length - 1; i >= 0; i--) {
-                columns.removeAt(i);
-            }
-
-            for (var i = 0; i < newColumns.length; i++) {
-                columns.insertAt(newColumns[i], i);
-            }
-
+            this.grid.config.columns = newColumns;
+         
             this.grid.refreshColumns();
 
             this.grid.refresh();

@@ -9,10 +9,11 @@ angular.module('angularWebixApp')
                 multiselect: true,
                 dragColumn: true,
                 resizeColumn: true,
+                resizeRow: true,
                 // frozen column
                 leftSplit: 2,
                 autoheight: false,
-                // autowidth: true,
+                autowidth: false,
                 columns: columns,
                 data: data
             }, configs || {});

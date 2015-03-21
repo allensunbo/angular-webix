@@ -4,16 +4,23 @@ angular.module('angularWebixApp')
             id: "rank",
             header: "rank",
             css: "rank",
-            width: 50
+            width: 50,
+            adjust: 'header'
         }, {
             id: "title",
-            header: "Film title",
+            header: {
+                text: "Film title",
+                css: {
+                    "background": "#AFA"
+                }
+            },
             width: 200,
             css: {
-                'text-align': 'right',
+                'text-align': 'center',
                 background: 'blue',
                 color: 'yellow'
-            }
+            },
+            adjust: 'data'
         }, {
             id: "year",
             header: "Released",

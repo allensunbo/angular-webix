@@ -1,12 +1,14 @@
 <div>
     <div style="background-color: blue;color:yellow;font-size:20px;">{{title}}</div>
-    <div class="webix_view webix_control webix_el_combo" view_id="field_m2" style="width: 700px; height: 38px;">
-        <label style="width: 80px;text-align: left;line-height:32px;" onclick="" for="a" class="webix_inp_label">
-            Test
+    <div class="webix_view webix_control webix_el_combo" view_id="field_msssss2" style="width: 700px;">
+        <label style="text-align: left;line-height:32px;" onclick="" for="{{::inputId}}" 
+          class="webix_inp_label">
+          TreeCombo
         </label>
-        <div class="webix_el_box" style="width:700px; height:38px">
-            <input id="a" type="combo" value="Banana" style="width: 614px; text-align: left;">
-            <span style="height:26px;padding-top:6px;" class="webix_input_icon fa-angle-down" ng-click="drop()"></span>
+        <div class="webix_el_box" style="height:38px;display:block;width:90%">
+            <span style="width:21px;height:26px;padding-top:6px;" class="webix_input_icon fa-angle-down" ng-click="drop()">
+            </span>
+            <input id="{{::inputId}}" type="text" value="Banana" style="width:auto;text-align:left;" ng-model="selected">
         </div>
     </div>
     <ng-transclude></ng-transclude>

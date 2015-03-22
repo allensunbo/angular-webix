@@ -35,66 +35,72 @@ angular.module('angularWebixApp')
                         y: yPosition
                     };
                 }
+                $scope.inputId = 'input-' + webix.uid();
                 $scope.drop = function() {
+                    var inputId = $scope.inputId;
                     console.log('drop');
-                    var elem = angular.element(document.querySelectorAll('#a'));
+                    var elem = angular.element(document.querySelectorAll('#' + inputId));
                     console.log(elem);
-                    var myElement = document.querySelector('#a');
+                    var myElement = document.querySelector('#' + inputId);
                     var position = getPosition(myElement);
                     console.log("The image is located at: " + position.x + ", " + position.y);
 
+                    var treedata = [{
+                        id: "1",
+                        value: "Book 1",
+                        data: [{
+                            id: "1.1",
+                            value: "Part 1"
+                        }, {
+                            id: "1.2",
+                            value: "Part 2"
+                        }]
+                    }, {
+                        id: "2",
+                        value: "Book 2",
+                        data: [{
+                            id: "2.1",
+                            value: "Part 1"
+                        }]
+                    }];
+
                     var menu = webix.ui({
-                        view: "contextmenu",
-                        data: ["Add", "Rename", "Delete", {
-                            $template: "Separator"
-                        }, "Info"],
-                        master: "a",
-                        top: position.y + 38,
+                        // view: "contextmenu",
+                        view: "popup",
+                        // container: 'treeCombo',
+                        body: {
+                            view: "tree",
+                            data: treedata,
+                            select: true,
+                            on: {
+                                onItemClick: function(id) {
+                                    var text = "Selected: " + id;
+                                    var selected = this.getItem(id);
+                                    console.log(this.getItem(id));
+                                    $scope.$apply(function() {
+                                        $scope.selected = selected.value;
+                                    });
+
+                                }
+                            }
+                        },
+                        master: inputId, // input field id
+                        top: position.y + 30,
                         left: position.x,
                         width: 614,
                         on: {
                             onItemClick: function(id) {
                                 webix.message(this.getItem(id).value);
                             }
-                        }
+                        },
                     });
                     menu.show();
                 }
             },
             // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
             link: function(scope, iElm, iAttrs, controller) {
-                console.log(scope);
-                var combo = webix.ui({
-                    view: "combo",
-                    container: "treeCombo",
-                    id: 'field_m',
-                    label: 'Combo',
-                    value: "Banana",
-                    yCount: "3",
-                    options: {
-                        body: {
-                            data: [{
-                                id: 1,
-                                value: "Banana"
-                            }, {
-                                id: 2,
-                                value: "Papai"
-                            }, {
-                                id: 3,
-                                value: "Apple"
-                            }],
-                            on: {
-                                'onItemClick': function(id) {
-                                    webix.message("Clicked: " + this.getItem(id).value);
-                                    var selected = this.getItem(id).value;
-                                    scope.$apply(function() {
-                                        scope.selected = selected;
-                                    });
-                                }
-                            }
-                        }
-                    }
-                });
+
+
             }
         };
     });

@@ -31,10 +31,10 @@ angular.module('angularWebixApp')
 
             this.grid = webix.ui(_configs);
 
+            // put event listeners in controller so that we can remove them!
             this.grid.attachEvent("onItemClick", function(id, e, node) {
                 var item = this.getItem(id);
                 console.log(item);
-                //... some code here ... 
             });
             this.grid.attachEvent('onBeforeContextMenu', function(id, e, node) {
                 var item = this.getItem(id);
@@ -76,6 +76,7 @@ angular.module('angularWebixApp')
         }
 
         FlatTableProvider.prototype.addContextMenu = function() {
+            var me = this;
             var menu = webix.ui({
                 view: "contextmenu",
                 data: ["Add", "Rename", "Delete", {
@@ -85,6 +86,8 @@ angular.module('angularWebixApp')
                 on: {
                     onItemClick: function(id) {
                         webix.message(this.getItem(id).value);
+                        console.log(me.grid.getSelectedId());
+                        webix.message(JSON.stringify(me.grid.getSelectedId()));
                     }
                 }
             });

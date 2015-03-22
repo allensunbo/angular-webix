@@ -28,6 +28,10 @@ angular
                 templateUrl: 'views/treeTable.html',
                 controller: 'TreeTableCtrl'
             })
+            .when('/treeCombo', {
+                templateUrl: 'views/treeCombo.html',
+                controller: 'TreeComboCtrl'
+            })
             .otherwise({
                 redirectTo: '/flat'
             });

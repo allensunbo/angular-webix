@@ -20,6 +20,47 @@ angular.module('angularWebixApp')
                 '</div>',*/
             // replace: true,
             transclude: true,
+            controller: function($scope) {
+                function getPosition(element) {
+                    var xPosition = 0;
+                    var yPosition = 0;
+
+                    while (element) {
+                        xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+                        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+                        element = element.offsetParent;
+                    }
+                    return {
+                        x: xPosition,
+                        y: yPosition
+                    };
+                }
+                $scope.drop = function() {
+                    console.log('drop');
+                    var elem = angular.element(document.querySelectorAll('#a'));
+                    console.log(elem);
+                    var myElement = document.querySelector('#a');
+                    var position = getPosition(myElement);
+                    console.log("The image is located at: " + position.x + ", " + position.y);
+
+                    var menu = webix.ui({
+                        view: "contextmenu",
+                        data: ["Add", "Rename", "Delete", {
+                            $template: "Separator"
+                        }, "Info"],
+                        master: "a",
+                        top: position.y + 38,
+                        left: position.x,
+                        width: 614,
+                        on: {
+                            onItemClick: function(id) {
+                                webix.message(this.getItem(id).value);
+                            }
+                        }
+                    });
+                    menu.show();
+                }
+            },
             // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
             link: function(scope, iElm, iAttrs, controller) {
                 console.log(scope);

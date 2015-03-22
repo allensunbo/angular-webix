@@ -1,4 +1,4 @@
-// Grouping columns
+// Grouping columns, header menu
 // The functionality is available in Webix Pro edition only.
 angular.module('angularWebixApp')
     .factory('FlatTableColumnProvider', function() {
@@ -22,7 +22,7 @@ angular.module('angularWebixApp')
                 background: 'blue',
                 color: 'yellow'
             },
-            adjust: 'data'
+            adjust: 'data',
         }, {
             id: "year",
             header: "Released",

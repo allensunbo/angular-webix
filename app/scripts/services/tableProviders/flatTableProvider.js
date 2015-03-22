@@ -2,10 +2,11 @@ angular.module('angularWebixApp')
     .factory('FlatTableProvider', function() {
 
         function FlatTableProvider(container, columns, data, configs) {
+            var me = this;
             var _configs = angular.extend({}, {
                 container: container,
                 view: 'datatable',
-                select: 'row',
+                select: 'cell',
                 multiselect: true,
                 dragColumn: true,
                 resizeColumn: true,
@@ -14,11 +15,35 @@ angular.module('angularWebixApp')
                 leftSplit: 2,
                 autoheight: false,
                 autowidth: false,
+                headermenu: {
+                    width: 250,
+                    autoheight: false,
+                    scroll: true
+                },
                 columns: columns,
-                data: data
+                data: data,
+                onContext: {
+                    /*"myActive": function(id, event, target) {
+                        webix.message("Active area was right-clicked");
+                    }*/
+                }
             }, configs || {});
 
             this.grid = webix.ui(_configs);
+
+            this.grid.attachEvent("onItemClick", function(id, e, node) {
+                var item = this.getItem(id);
+                console.log(item);
+                //... some code here ... 
+            });
+            this.grid.attachEvent('onBeforeContextMenu', function(id, e, node) {
+                var item = this.getItem(id);
+                console.log(item);
+                console.log(e);
+                console.log(node);
+                me.grid.select(item.id, 'title', false);
+            });
+
         }
 
         FlatTableProvider.prototype.removeColumn = function(columnIndex, refresh) {
@@ -49,6 +74,23 @@ angular.module('angularWebixApp')
             }
 
         }
+
+        FlatTableProvider.prototype.addContextMenu = function() {
+            var menu = webix.ui({
+                view: "contextmenu",
+                data: ["Add", "Rename", "Delete", {
+                    $template: "Separator"
+                }, "Info"],
+                master: "flatTable",
+                on: {
+                    onItemClick: function(id) {
+                        webix.message(this.getItem(id).value);
+                    }
+                }
+            });
+
+            // menu.attactTo(this.grid);
+        };
 
         return FlatTableProvider;
 

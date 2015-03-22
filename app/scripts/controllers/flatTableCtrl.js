@@ -19,6 +19,7 @@ angular.module('angularWebixApp')
                 tableProvider = new FlatTableProvider('flatTable', columns, response.data);
                 grid = tableProvider.grid;
                 loaded = true;
+                tableProvider.addContextMenu();
             });
 
         $scope.removeColumn = function() {
